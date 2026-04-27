@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shaik Sofiyan — Web Developer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #0d1b2a;
+      --navy2: #1b2838;
+      --cyan: #48cae4;
+      --cyan2: #00b4d8;
+      --white: #f0f4f8;
+      --muted: #8899aa;
+      --card: rgba(255,255,255,0.04);
+      --border: rgba(72,202,228,0.15);
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 2px; }
+
+    /* ========== NAVBAR ========== */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 40px;
+      background: rgba(13,27,42,0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.1em;
+      color: var(--cyan);
+    }
+
+    nav { display: flex; gap: 32px; }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--cyan);
+      transition: width 0.3s;
+    }
+
+    nav a:hover { color: var(--cyan); }
+    nav a:hover::after { width: 100%; }
+
+    /* ========== HERO ========== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 40px 80px;
+      position: relative;
+      overflow: hidden;
+      background-image: url("https://i.postimg.cc/c43HfK64/hq720.jpg");
+      background-size: contain;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+      
+      background-color: #0d1b2a;
+      margin: 0;
+      
+      
+    }
+
+    /* Dark overlay — text readable rehne ke liye */
+    .hero-overlay {
+      position: absolute;
+  
+      pointer-events: none;
+    }
+
+    
+
+    
+
+    
+      50%  { opacity: 1; }
+      100% { opacity: 0.8; }
+    }
+
+    
+      100% { opacity: 1;   transform: translateX(-50%) scale(1.1); }
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      border: 1px solid var(--border);
+      padding: 6px 16px;
+      border-radius: 2px;
+      margin-bottom: 28px;
+      position: relative;
+      animation: fadeUp 0.8s 0.1s ease both;
+    
+    }
+
+    .hero h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 14vw, 9rem);
+      letter-spacing: 0.04em;
+      line-height: 0.9;
+      position: relative;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero h1 span { color: var(--cyan); display: block; }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: var(--muted);
+      margin: 24px 0 40px;
+      letter-spacing: 0.05em;
+      position: relative;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      position: relative;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+
+    .btn-main {
+      background: var(--cyan);
+      color: var(--navy);
+      padding: 14px 32px;
+      text-decoration: none;
+      border-radius: 3px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: all 0.25s;
+    }
+
+    .btn-main:hover {
+      background: #90e0ef;
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(72,202,228,0.3);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      padding: 14px 32px;
+      text-decoration: none;
+      border-radius: 3px;
+      font-weight: 500;
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      transition: all 0.25s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--cyan);
+      color: var(--cyan);
+      transform: translateY(-3px);
+    }
+
+    /* Scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      animation: fadeUp 1s 0.8s ease both;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--cyan), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* ========== SECTIONS ========== */
+    section {
+      padding: 100px 40px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-eyebrow::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--cyan);
+    }
+
+    h2.section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      letter-spacing: 0.05em;
+      margin-bottom: 48px;
+      line-height: 1;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* ========== ABOUT ========== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    .about-text p strong { color: var(--white); }
+
+    .stats-col { display: flex; flex-direction: column; gap: 24px; }
+
+    .stat {
+      border-left: 2px solid var(--cyan);
+      padding-left: 20px;
+    }
+
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.8rem;
+      color: var(--cyan);
+      line-height: 1;
+      letter-spacing: 0.05em;
+    }
+
+    .stat-label {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ========== SKILLS ========== */
+    #skills { background: none; }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    .skill {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 14px 18px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--muted);
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+    }
+
+    .skill::before {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 0;
+      width: 0; height: 2px;
+      background: var(--cyan);
+      transition: width 0.35s ease;
+    }
+
+    .skill:hover {
+      color: var(--white);
+      border-color: rgba(72,202,228,0.35);
+      background: rgba(72,202,228,0.07);
+    }
+
+    .skill:hover::before { width: 100%; }
+
+    /* ========== PROJECTS ========== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 28px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      display: block;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .project-card:hover {
+      border-color: rgba(72,202,228,0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .project-card:hover::before { opacity: 1; }
+
+    .project-type {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 12px;
+    }
+
+    .project-card h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    .project-card p {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.7;
+    }
+
+    .project-arrow {
+      display: inline-block;
+      margin-top: 16px;
+      color: var(--cyan);
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: transform 0.2s;
+    }
+
+    .project-card:hover .project-arrow { transform: translateX(6px); }
+
+    /* ========== CONTACT ========== */
+    .contact-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 56px 48px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-box::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-50%);
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(72,202,228,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .contact-box h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      margin-bottom: 36px;
+      font-size: 0.95rem;
+    }
+
+    .contact-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .contact-email {
+      display: block;
+      background: var(--cyan);
+      color: var(--navy);
+      padding: 16px 24px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+      transition: all 0.25s;
+    }
+
+    .contact-email:hover {
+      background: #90e0ef;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(72,202,228,0.25);
+    }
+
+    .contact-wa {
+      display: block;
+      background: transparent;
+      color: #4ade80;
+      border: 1px solid rgba(74,222,128,0.25);
+      padding: 14px 24px;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 0.88rem;
+      transition: all 0.25s;
+    }
+
+    .contact-wa:hover {
+      background: rgba(74,222,128,0.08);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(74,222,128,0.15);
+    }
+
+    /* ========== FOOTER ========== */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 40px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+
+    footer span { color: var(--cyan); }
+
+    /* ========== ANIMATIONS ========== */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (max-width: 700px) {
+      header { padding: 16px 20px; }
+      nav { gap: 20px; }
+      nav a { font-size: 0.75rem; }
+      .hero { padding: 100px 20px 80px; }
+      section { padding: 70px 20px; }
+      .about-grid { grid-template-columns: 1fr; gap: 36px; }
+      .contact-box { padding: 36px 20px; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <h2 class="logo">Sofiyan</h2>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-overlay"></div>
+    
+    
+    <div class="hero-tag">Available for Opportunities</div>
+    <h1>Shaik<span>Sofiyan</span></h1>
+    <p class="hero-sub">Web Developer &amp; Software Developer — Hyderabad, Telangana</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-main">View Projects</a>
+      <a href="#contact" class="btn-ghost">Hire Me</a>
+    </div>
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-eyebrow">Who I Am</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>I'm a <strong>self-driven developer</strong> from Hyderabad with a strong foundation in web development and software engineering. Currently completing my Intermediate (MPC + CS) and actively building real-world projects every day.</p>
+        <p>I specialize in building <strong>responsive websites, interactive tools, and creative software</strong> — with a focus on clean code, good UI, and practical functionality.</p>
+        <p>Beyond coding, I bring skills in <strong>graphic design, video editing, and MS Office</strong> — making me a well-rounded digital professional.</p>
+      </div>
+      <div class="stats-col">
+        <div class="stat">
+          <div class="stat-num">4+</div>
+          <div class="stat-label">Projects Built</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">6+</div>
+          <div class="stat-label">Languages Known</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Languages Spoken</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-eyebrow">What I Know</div>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid reveal">
+      <div class="skill">HTML5</div>
+      <div class="skill">CSS3</div>
+      <div class="skill">JavaScript</div>
+      <div class="skill">Python</div>
+      <div class="skill">C</div>
+      <div class="skill">C++</div>
+      <div class="skill">Flexbox</div>
+      <div class="skill">CSS Grid</div>
+      <div class="skill">Responsive Design</div>
+      <div class="skill">DOM Manipulation</div>
+      <div class="skill">CSS Animation</div>
+      <div class="skill">UI/UX Design</div>
+      <div class="skill">MS Office</div>
+      <div class="skill">Canva</div>
+      <div class="skill">Video Editing</div>
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-eyebrow">What I've Built</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid reveal">
+
+      <a href="https://shaik-sofiyan.netlify.app/" target="_blank" class="project-card">
+        <div class="project-type">Web App</div>
+        <h3>About Me Page</h3>
+        <p>Responsive personal page built with Flexbox layout and clean modern design.</p>
+        <span class="project-arrow">View Project →</span>
+      </a>
+
+      <a href="https://profile-card7.netlify.app/" target="_blank" class="project-card">
+        <div class="project-type">UI Component</div>
+        <h3>Profile Card</h3>
+        <p>Glassmorphism profile card with animations, skill tags, and contact buttons.</p>
+        <span class="project-arrow">View Project →</span>
+      </a>
+
+      <a href="https://lexogamer786-cyber.github.io/portfolio-website/" target="_blank" class="project-card">
+        <div class="project-type">Portfolio</div>
+        <h3>Portfolio Website</h3>
+        <p>Full personal portfolio with dark theme, projects showcase, and live GitHub Pages hosting.</p>
+        <span class="project-arrow">View Project →</span>
+      </a>
+
+      <div class="project-card" style="cursor:default;">
+        <div class="project-type">Coming Soon</div>
+        <h3>JavaScript Calculator</h3>
+        <p>Interactive calculator with full keyboard support and smooth animations — in progress.</p>
+        <span class="project-arrow" style="color:var(--muted);">In Progress...</span>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider"/>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-box reveal">
+      <div class="section-eyebrow" style="justify-content:center;">Get In Touch</div>
+      <h2>Let's Work Together</h2>
+      <p>Open to internships, freelance projects, and full-time opportunities.<br/>Feel free to reach out anytime!</p>
+      <div class="contact-btns">
+        <a href="mailto:lexogamer786@gmail.com" class="contact-email">📧 lexogamer786@gmail.com</a>
+        <a href="https://wa.me/919703434281" target="_blank" class="contact-wa">💬 WhatsApp: +91 97034 34281</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 <span>Shaik Sofiyan</span> &nbsp;·&nbsp; Hyderabad, Telangana &nbsp;·&nbsp; Built with HTML &amp; CSS</p>
+  </footer>
+
+  <script>
+    // Scroll reveal animation
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
